@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 8080
 
 # Set the startup command to 'npm start'
-CMD [ "npm", "start"] 
+CMD [ "npm", "start"]
