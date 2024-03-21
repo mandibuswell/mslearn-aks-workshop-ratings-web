@@ -14,7 +14,6 @@ spec:
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Allow
-  wildcardPolicy: None
   to:
     kind: Service
     name: tank-rating-web
