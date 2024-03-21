@@ -11,6 +11,10 @@ metadata:
 spec:
   port:
     targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+  wildcardPolicy: None
   to:
     kind: Service
     name: tank-rating-web
