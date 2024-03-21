@@ -14,7 +14,7 @@
       <div class="col-lg-6">
       </div>
       <div class="col-lg-12 credits">
-        Azure Red Hat OpenShift (ARO) workshop
+        Powered By </br> Azure Red Hat OpenShift (ARO)
       </div>
       <div class="col-lg-6">
       </div>
