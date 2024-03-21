@@ -1,0 +1,18 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: tank-rating-web
+    app.kubernetes.io/component: tank-rating-web
+    app.kubernetes.io/instance: tank-rating-web
+  name: tank-rating-web
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: tank-rating-web
+    weight: 100
+  wildcardPolicy: None

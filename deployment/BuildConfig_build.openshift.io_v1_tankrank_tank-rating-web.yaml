@@ -1,0 +1,42 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: tank-rating-web
+    app.kubernetes.io/component: tank-rating-web
+    app.kubernetes.io/instance: tank-rating-web
+  name: tank-rating-web
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: tank-rating-web:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      ref: tankrank
+      uri: https://github.com/mandibuswell/mslearn-aks-workshop-ratings-web
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: node:14-alpine3.15
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: qn0U1qoON7rmWQUAsE8R
+    type: GitHub
+  - generic:
+      secret: p1VC1VuUcmptpwvjLnKr
+    type: Generic
+  - type: ConfigChange
+  - imageChange: {}
+    type: ImageChange

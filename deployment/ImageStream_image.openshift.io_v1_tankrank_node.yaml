@@ -1,0 +1,26 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+    openshift.io/image.dockerRepositoryCheck: "2024-03-21T01:39:32Z"
+  labels:
+    app: tank-rating-web
+    app.kubernetes.io/component: tank-rating-web
+    app.kubernetes.io/instance: tank-rating-web
+  name: node
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      openshift.io/imported-from: node:14-alpine3.15
+    from:
+      kind: DockerImage
+      name: node:14-alpine3.15
+    generation: 2
+    importPolicy:
+      importMode: Legacy
+    name: 14-alpine3.15
+    referencePolicy:
+      type: Source

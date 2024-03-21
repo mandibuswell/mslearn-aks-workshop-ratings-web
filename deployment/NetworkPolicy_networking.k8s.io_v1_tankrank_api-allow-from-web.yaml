@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations: {}
+  name: api-allow-from-web
+spec:
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: tank-rating-web
+  podSelector:
+    matchLabels:
+      app: tank-rating-api
+  policyTypes:
+  - Ingress

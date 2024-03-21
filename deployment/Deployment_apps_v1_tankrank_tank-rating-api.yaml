@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"tank-rating-api:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"tank-rating-api\")].image","pause":""}]'
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: tank-rating-api
+    app.kubernetes.io/component: tank-rating-api
+    app.kubernetes.io/instance: tank-rating-api
+  name: tank-rating-api
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: tank-rating-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        deployment: tank-rating-api
+    spec:
+      containers:
+      - env:
+        - name: MONGODB_URI
+          value: mongodb://ratingsuser:ratingspassword@mongodb.tankrank.svc.cluster.local:27017/ratingsdb
+        image: image-registry.openshift-image-registry.svc:5000/tankrank/tank-rating-api@sha256:52be18fdb23768f14337838edbbc821a840059673939b8db15dfa80d525a8614
+        imagePullPolicy: IfNotPresent
+        name: tank-rating-api
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
